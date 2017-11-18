@@ -14,6 +14,7 @@
 import socket
 import os
 import datetime
+from shutil import copyfile
 from configparser import ConfigParser
 configdir=os.getenv('CONFIGDIR')
 if configdir == None:
@@ -21,6 +22,10 @@ if configdir == None:
 configfile=configdir+'SWSconfig.ini'
 
 datafile = open("config.py", "w")
+if not os.path.isfile("configtail.txt"):
+	print "File Configtail.txt not found, copying configtail.template" 
+	copyfile("configtail.template", "configtail.txt")
+
 tailfile = open("configtail.txt", "r")
 datafile.write("# SWS configuration file \n")
 
